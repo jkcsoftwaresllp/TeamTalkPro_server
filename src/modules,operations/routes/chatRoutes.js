@@ -7,7 +7,7 @@ import {
   getUserChats,
   getChatMessages
 } from '../controllers/chatController.js';
-import { authenticate } from '../../../middleware/authMiddleware.js';
+import { authenticate } from '../../middleware/authMiddleware.js';
 
 const router = express.Router();
 
