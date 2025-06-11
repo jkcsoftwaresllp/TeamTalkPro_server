@@ -1,15 +1,15 @@
-const { getDB } = require("../../../config/db");
+import { getDB } from '../../../config/db.js';
 
-exports.createReply = async (originalMessageId, userId, replyContent) => {
+export const createReply = async (originalMessageId, userId, replyContent) => {
   const db = getDB();
-  const [rows] = await db.query("SELECT chat_id FROM messages WHERE id = ?", [
+  const [rows] = await db.query('SELECT chat_id FROM messages WHERE id = ?', [
     originalMessageId,
   ]);
-  if (!rows.length) throw new Error("Original message not found");
+  if (!rows.length) throw new Error('Original message not found');
   const chatId = rows[0].chat_id;
 
   const [result] = await db.query(
-    "INSERT INTO messages (chat_id, sender_id, content, reply_to) VALUES (?, ?, ?, ?)",
+    'INSERT INTO messages (chat_id, sender_id, content, reply_to) VALUES (?, ?, ?, ?)',
     [chatId, userId, replyContent, originalMessageId]
   );
 
@@ -23,17 +23,17 @@ exports.createReply = async (originalMessageId, userId, replyContent) => {
   };
 };
 
-exports.addReaction = async (messageId, userId, reaction) => {
+export const addReaction = async (messageId, userId, reaction) => {
   const db = getDB();
   await db.query(
-    "INSERT INTO message_reactions (message_id, user_id, reaction) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE reaction = ?",
+    'INSERT INTO message_reactions (message_id, user_id, reaction) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE reaction = ?',
     [messageId, userId, reaction, reaction]
   );
   const [msgRows] = await db.query(
-    "SELECT chat_id FROM messages WHERE id = ?",
+    'SELECT chat_id FROM messages WHERE id = ?',
     [messageId]
   );
-  if (!msgRows.length) throw new Error("Message not found");
+  if (!msgRows.length) throw new Error('Message not found');
 
   return {
     message_id: messageId,
@@ -43,16 +43,16 @@ exports.addReaction = async (messageId, userId, reaction) => {
   };
 };
 
-exports.forwardMessage = async (messageId, userId, targetChatId) => {
+export const forwardMessage = async (messageId, userId, targetChatId) => {
   const db = getDB();
-  const [orig] = await db.query("SELECT content FROM messages WHERE id = ?", [
+  const [orig] = await db.query('SELECT content FROM messages WHERE id = ?', [
     messageId,
   ]);
-  if (!orig.length) throw new Error("Original message not found");
+  if (!orig.length) throw new Error('Original message not found');
   const content = orig[0].content;
 
   const [result] = await db.query(
-    "INSERT INTO messages (chat_id, sender_id, content, forwarded_from) VALUES (?, ?, ?, ?)",
+    'INSERT INTO messages (chat_id, sender_id, content, forwarded_from) VALUES (?, ?, ?, ?)',
     [targetChatId, userId, content, messageId]
   );
 

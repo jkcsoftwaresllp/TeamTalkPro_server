@@ -1,10 +1,12 @@
 // config/db.js
-const mysql = require('mysql2/promise');
-require('dotenv').config();
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 let pool;
 
-async function connectDB() {
+export async function connectDB() {
   if (!pool) {
     pool = mysql.createPool({
       host: process.env.DB_HOST,
@@ -18,9 +20,7 @@ async function connectDB() {
   return pool;
 }
 
-function getDB() {
+export function getDB() {
   if (!pool) throw new Error('DB not connected');
   return pool;
 }
-
-module.exports = { connectDB, getDB };

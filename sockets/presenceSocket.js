@@ -1,8 +1,6 @@
-// sockets/presenceSocket.js
-
 const onlineUsers = new Map();
 
-module.exports = (io, socket) => {
+const presenceSocket = (io, socket) => {
   // Mark user as online and broadcast updated user list
   socket.on('userOnline', (userId) => {
     if (userId) {
@@ -35,7 +33,7 @@ module.exports = (io, socket) => {
 
   // On disconnect, remove user from online list
   socket.on('disconnect', () => {
-    for (let [userId, socketId] of onlineUsers.entries()) {
+    for (const [userId, socketId] of onlineUsers.entries()) {
       if (socketId === socket.id) {
         onlineUsers.delete(userId);
         break;
@@ -44,3 +42,5 @@ module.exports = (io, socket) => {
     io.emit('onlineUsers', Array.from(onlineUsers.keys()));
   });
 };
+
+export default presenceSocket;

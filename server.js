@@ -1,12 +1,12 @@
-require('dotenv').config();
-const express = require('express');
-const http = require('http');
-const cors = require('cors');
-const { Server } = require('socket.io');
-const app = require('./app'); // if your express config is modularized
-const { setupSocket } = require('./config/socket');
-const { connectDB } = require('./config/db');
-const chatRoutes = require('./src/modules,operations/routes/chatRoutes.js');
+import 'dotenv/config';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import { Server } from 'socket.io';
+import appConfig from './app.js'; // renamed to avoid duplicate 'app'
+import { setupSocket } from './config/socket.js';
+import { connectDB } from './config/db.js';
+import chatRoutes from './src/modules_operations/routes/chatRoutes.js'; // fixed path
 
 const PORT = process.env.PORT || 5000;
 
@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 
     app.use('/api/chats', chatRoutes);
 
-    setupSocket(io); // or chatSocket(io) if you're not using setupSocket
+    setupSocket(io);
 
     server.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);

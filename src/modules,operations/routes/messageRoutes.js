@@ -1,21 +1,20 @@
-// routes/messageRoutes.js
-
-const express = require("express");
-const router = express.Router();
-const {
+import express from 'express';
+import {
   replyToMessage,
   reactToMessage,
   forwardMessage,
-} = require("../controllers/messageController");
-const verifyToken = require("../../../middleware/authMiddleware");
+} from '../controllers/messageController.js';
+import verifyToken from '../../../middleware/authMiddleware.js';
+
+const router = express.Router();
 
 // POST /api/messages/reply
-router.post("/reply", verifyToken, replyToMessage);
+router.post('/reply', verifyToken, replyToMessage);
 
 // POST /api/messages/react
-router.post("/react", verifyToken, reactToMessage);
+router.post('/react', verifyToken, reactToMessage);
 
 // POST /api/messages/forward
-router.post("/forward", verifyToken, forwardMessage);
+router.post('/forward', verifyToken, forwardMessage);
 
-module.exports = router;
+export default router;

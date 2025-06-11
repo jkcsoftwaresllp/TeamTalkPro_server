@@ -1,12 +1,9 @@
-// config/socket.js
-
-const { handleMessageEvents } = require('../sockets/messageSocket');
+import { Server } from 'socket.io';
+import { handleMessageEvents } from '../sockets/messageSocket.js';
 
 let io;
 
-const setupSocket = (server) => {
-  const { Server } = require('socket.io');
-
+export const setupSocket = (server) => {
   io = new Server(server, {
     cors: {
       origin: true,
@@ -26,9 +23,7 @@ const setupSocket = (server) => {
   });
 };
 
-const getIO = () => {
+export const getIO = () => {
   if (!io) throw new Error('Socket.io not initialized');
   return io;
 };
-
-module.exports = { setupSocket, getIO };

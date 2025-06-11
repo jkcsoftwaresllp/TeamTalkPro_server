@@ -1,7 +1,7 @@
-const messageSocket = require('./messageSocket');
-const presenceSocket = require('./presenceSocket');
+import messageSocket from './messageSocket.js';
+import presenceSocket from './presenceSocket.js';
 
-module.exports = (io) => {
+const setupSocket = (io) => {
   io.on('connection', (socket) => {
     console.log('🔌 New client connected:', socket.id);
 
@@ -16,3 +16,5 @@ module.exports = (io) => {
     });
   });
 };
+
+export default setupSocket;
