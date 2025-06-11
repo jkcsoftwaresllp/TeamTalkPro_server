@@ -3,7 +3,7 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import chatRoutes from './src/modules,operations/routes/chatRoutes.js';
+import chatRoutes from './src/modules/routes/chatRoutes.js';
 import chatSocket from './src/socket.js';
 
 const app = express();
