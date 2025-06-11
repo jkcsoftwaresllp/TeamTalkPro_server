@@ -1,24 +1,26 @@
 // app.js
 
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-const messageRoutes = require('./routes/messageRoutes');
-const errorHandler = require('./middleware/errorHandler');
+const messageRoutes = require("./src/modules,operations/routes/messageRoutes");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
 // Middleware setup
-app.use(cors({
+app.use(
+  cors({
     origin: true,
-    credentials: true
-}));
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/api/messages', messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 // Global error handler
 app.use(errorHandler);

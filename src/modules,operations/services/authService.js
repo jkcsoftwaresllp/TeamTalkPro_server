@@ -1,9 +1,9 @@
-const db = require('../config/db');
-const bcrypt = require('bcrypt');
+const db = require("../../../config/db");
+const bcrypt = require("bcrypt");
 
 exports.verifyUser = async (email, password) => {
   return new Promise((resolve, reject) => {
-    const query = 'SELECT * FROM users WHERE email = ? LIMIT 1';
+    const query = "SELECT * FROM users WHERE email = ? LIMIT 1";
 
     db.query(query, [email], async (err, results) => {
       if (err) return reject(err);
