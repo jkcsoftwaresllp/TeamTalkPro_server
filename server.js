@@ -1,12 +1,12 @@
-import 'dotenv/config';
-import express from 'express';
-import http from 'http';
-import cors from 'cors';
-import { Server } from 'socket.io';
-import appConfig from './app.js'; // renamed to avoid duplicate 'app'
-import { setupSocket } from './config/socket.js';
-import { connectDB } from './config/db.js';
-import chatRoutes from './src/modules_operations/routes/chatRoutes.js'; // fixed path
+import "dotenv/config";
+import express from "express";
+import http from "http";
+import cors from "cors";
+import { Server } from "socket.io";
+import appConfig from "./app.js"; // renamed to avoid duplicate 'app'
+import { setupSocket } from "./src/config/socket.js";
+import { connectDB } from "./src/config/db.js";
+import chatRoutes from "./src/modules_operations/routes/chatRoutes.js"; // fixed path
 
 const PORT = process.env.PORT || 5000;
 
@@ -18,15 +18,15 @@ const PORT = process.env.PORT || 5000;
     const server = http.createServer(app);
     const io = new Server(server, {
       cors: {
-        origin: '*',
-        methods: ['GET', 'POST', 'DELETE'],
+        origin: "*",
+        methods: ["GET", "POST", "DELETE"],
       },
     });
 
     app.use(cors());
     app.use(express.json());
 
-    app.use('/api/chats', chatRoutes);
+    app.use("/api/chats", chatRoutes);
 
     setupSocket(io);
 
@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 5000;
       console.log(`Server running on port ${PORT}`);
     });
   } catch (err) {
-    console.error('❌ Failed to start server:', err.message);
+    console.error("❌ Failed to start server:", err.message);
     process.exit(1);
   }
 })();

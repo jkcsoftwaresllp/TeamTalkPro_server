@@ -1,5 +1,5 @@
-import * as messageService from '../services/messageService.js';
-import { getIO } from '../../../config/socket.js';
+import * as messageService from "../services/messageService.js";
+import { getIO } from "../config/socket.js";
 
 export const replyToMessage = async (req, res, next) => {
   try {
@@ -12,9 +12,9 @@ export const replyToMessage = async (req, res, next) => {
       replyContent
     );
 
-    getIO().to(replyMessage.chat_id.toString()).emit('newReply', replyMessage);
+    getIO().to(replyMessage.chat_id.toString()).emit("newReply", replyMessage);
 
-    res.status(201).json({ message: 'Reply sent', data: replyMessage });
+    res.status(201).json({ message: "Reply sent", data: replyMessage });
   } catch (err) {
     next(err);
   }
@@ -31,13 +31,13 @@ export const reactToMessage = async (req, res, next) => {
       reaction
     );
 
-    getIO().to(reactionResult.chat_id.toString()).emit('newReaction', {
+    getIO().to(reactionResult.chat_id.toString()).emit("newReaction", {
       messageId,
       userId,
       reaction,
     });
 
-    res.status(200).json({ message: 'Reaction added', data: reactionResult });
+    res.status(200).json({ message: "Reaction added", data: reactionResult });
   } catch (err) {
     next(err);
   }
@@ -54,9 +54,9 @@ export const forwardMessage = async (req, res, next) => {
       targetChatId
     );
 
-    getIO().to(targetChatId.toString()).emit('messageForwarded', forwarded);
+    getIO().to(targetChatId.toString()).emit("messageForwarded", forwarded);
 
-    res.status(201).json({ message: 'Message forwarded', data: forwarded });
+    res.status(201).json({ message: "Message forwarded", data: forwarded });
   } catch (err) {
     next(err);
   }

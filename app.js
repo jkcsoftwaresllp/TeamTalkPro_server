@@ -4,8 +4,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const messageRoutes = require("./src/modules,operations/routes/messageRoutes");
-const errorHandler = require("./middleware/errorHandler");
+const messageRoutes = require("./src/routes/messageRoutes");
+const errorHandler = require("./src/middleware/errorHandler");
 
 const app = express();
 
