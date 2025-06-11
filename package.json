@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "backend of teamtalkpro",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/jkcsoftwaresllp/TeamTalkPro_server/issues"
   },
-  "homepage": "https://github.com/jkcsoftwaresllp/TeamTalkPro_server#readme"
+  "homepage": "https://github.com/jkcsoftwaresllp/TeamTalkPro_server#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1"
+  },
+  "keywords": []
 }
