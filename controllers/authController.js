@@ -1,16 +1,15 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const db = require('../config/db');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import db from '../config/db.js'; // Don't forget the `.js` extension
 
 // ✅ Signup Controller
-exports.signup = (req, res) => {
+export const signup = (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
-  // Check if user already exists
   const checkSql = 'SELECT * FROM users WHERE username = ?';
   db.query(checkSql, [username], (err, results) => {
     if (err) return res.status(500).json({ error: 'Database error' });
@@ -30,7 +29,7 @@ exports.signup = (req, res) => {
 };
 
 // ✅ Login Controller
-exports.login = (req, res) => {
+export const login = (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {

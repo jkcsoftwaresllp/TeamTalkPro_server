@@ -1,12 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const {
+import express from 'express';
+import {
   createMessage,
   getMessages,
   searchMessages
-} = require('../controllers/messageController');
+} from '../controllers/messageController.js';
 
-const authMiddleware = require('../middleware/authMiddleware');
+import authMiddleware from '../middleware/authMiddleware.js';
+
+const router = express.Router();
 
 // Apply middleware to protect all message routes
 router.use(authMiddleware);
@@ -15,4 +16,4 @@ router.post('/', createMessage);
 router.get('/:chatId/search', searchMessages);
 router.get('/:chatId', getMessages);
 
-module.exports = router;
+export default router;

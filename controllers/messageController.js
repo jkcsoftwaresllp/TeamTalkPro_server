@@ -1,7 +1,7 @@
-const db = require('../config/db');
+import db from '../config/db.js';
 
 // ✅ GET MESSAGES WITH PAGINATION
-exports.getMessages = (req, res) => {
+export const getMessages = (req, res) => {
   const { chatId } = req.params;
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 20;
@@ -43,7 +43,7 @@ exports.getMessages = (req, res) => {
 };
 
 // ✅ SEARCH MESSAGES WITH PAGINATION
-exports.searchMessages = (req, res) => {
+export const searchMessages = (req, res) => {
   const { chatId } = req.params;
   const keyword = req.query.keyword || '';
   const page = parseInt(req.query.page) || 1;
@@ -89,7 +89,7 @@ exports.searchMessages = (req, res) => {
 };
 
 // ✅ CREATE A MESSAGE
-exports.createMessage = (req, res) => {
+export const createMessage = (req, res) => {
   const { chat_id, user_id, content } = req.body;
 
   if (!chat_id || !user_id || !content) {

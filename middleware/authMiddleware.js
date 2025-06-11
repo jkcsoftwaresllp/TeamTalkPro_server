@@ -1,10 +1,11 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-module.exports = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith('Bearer '))
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'No token provided' });
+  }
 
   const token = authHeader.split(' ')[1];
 
@@ -16,3 +17,5 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ error: 'Invalid token' });
   }
 };
+
+export default authMiddleware;

@@ -1,6 +1,6 @@
 const onlineUsers = new Map();
 
-module.exports = (io) => {
+const socketHandler = (io) => {
   io.on('connection', (socket) => {
     console.log('⚡ User connected:', socket.id);
 
@@ -18,7 +18,7 @@ module.exports = (io) => {
     });
 
     socket.on('disconnect', () => {
-      for (let [userId, id] of onlineUsers.entries()) {
+      for (const [userId, id] of onlineUsers.entries()) {
         if (id === socket.id) {
           onlineUsers.delete(userId);
           break;
@@ -29,3 +29,5 @@ module.exports = (io) => {
     });
   });
 };
+
+export default socketHandler;

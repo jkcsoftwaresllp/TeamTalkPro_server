@@ -1,11 +1,10 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
-const http = require('http');
-const { Server } = require('socket.io');
-const messageRoutes = require('./routes/messageRoutes');
-const authRoutes = require('./routes/authRoutes');
-const socketHandler = require('./sockets/socketHandler');
+import express from 'express';
+import dotenv from 'dotenv';
+import http from 'http';
+import { Server } from 'socket.io';
+import messageRoutes from './routes/messageRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import socketHandler from './sockets/socketHandler.js';
 
 dotenv.config();
 const app = express();
@@ -28,6 +27,7 @@ const io = new Server(server, {
 // ✅ Use the socket handler
 socketHandler(io);
 
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`✅ Server running with Socket.IO on port ${PORT}`);
