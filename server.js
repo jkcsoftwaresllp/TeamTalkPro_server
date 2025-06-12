@@ -7,6 +7,7 @@ import { setupSocket } from './socket/index.js';
 import { config } from 'dotenv';
 
 config();
+setupSocket(io);
 
 const app = express();
 app.use(express.json());
