@@ -12,7 +12,6 @@ import { setupSocket } from "./src/config/socket.js";
 // Routes
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
-import chatRoutes from "./src/modules_operations/routes/chatRoutes.js";
 
 // Middleware
 import errorHandler from "./middleware/error.middleware.js";
@@ -40,7 +39,7 @@ const PORT = process.env.PORT || 5000;
     // Routes
     app.use("/api/auth", authRoutes);
     app.use("/api/user", userRoutes);
-    app.use("/api/chats", chatRoutes);
+
 
     // Error handler
     app.use(errorHandler);
